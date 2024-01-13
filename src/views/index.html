@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layout.html" %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecoleta</title>
+   {% set pageId = "page-home" %}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&family=Ubuntu:wght@700&display=swap"
-    rel="stylesheet">
+  {% block styles %}
+    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/modal.css">
+  {% endblock styles %}
 
-  <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/home.css">
-  <link rel="stylesheet" href="../styles/modal.css">
+ 
 
-  <link rel="stylesheet" href="../styles/responsive.css">
-</head>
-
-
-<body>
-
-  <div id="page-home">
+  {% block content %}
     <div class="content">
       <header>
         <img src="/assets/logo.svg" alt="Logomarca">
@@ -45,12 +33,14 @@
 
 
     </div>
+  {% endblock content %}
 
-  </div>
+ 
+  {% block modal %}
+    {% include "partials/modal.html" %} 
+  {% endblock modal %}
 
-  {% include "partials/modal.html" %}
 
-  <script src="/scripts/index.js"></script>
-</body>
-
-</html>
+  {% block scripts %}
+    <script src="/scripts/index.js"></script> 
+  {% endblock scripts %}
