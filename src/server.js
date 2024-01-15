@@ -1,30 +1,40 @@
-const express = require('express')
-const server = express()
+const express = require("express");
+const server = express();
+
+//BANCO DE DADOS
+const db = require("./database/db");
 
 //CONFIGURAR PASTA PUBLICA
-server.use(express.static("public"))
+server.use(express.static("public"));
 
 // UTILIZANDO TEMPLATE ENGINE
-const nunjucks = require('nunjucks')
+const nunjucks = require("nunjucks");
 nunjucks.configure("src/views", {
   express: server,
-  noCache: true
-})
-
+  noCache: true,
+});
 
 // CONFIGURAR CAMINHOS DA APLICAÇÃO
 // PÁGINA INICIAL
 // REQ: REQUISIÇÃO
 // RES: RESPOSTA
-server.get('/', (req, res) => {
-  return res.render("index.html")  
-})
-server.get('/create-point', (req, res) => {
-  return res.render("create-point.html")  
-})
-server.get('/search', (req, res) => {
-  return res.render("search-results.html")  
-})
+server.get("/", (req, res) => {
+  return res.render("index.html");
+});
+server.get("/create-point", (req, res) => {
+  return res.render("create-point.html");
+});
+server.get("/search", (req, res) => {
+  db.all(`SELECT * FROM places`, function (err, rows) {
+    if (err) {
+      return console.log(err);
+    }
+
+  return res.render("search-results.html", {places: rows});
+    
+  });
+
+});
 
 // LIGAR O SERVIDOR
-server.listen(3000)
+server.listen(3000);
